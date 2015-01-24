@@ -6,7 +6,7 @@ import re
 # localhost:8080にアクセスしたときに最初に開くページ
 @route('/')
 def index():
-  search_result = str(match(76))
+  search_result = str(match(7690))
   return template('index.tpl', search_result = search_result)
 
 # from http://codepad.org/N9hPp78j
@@ -17,17 +17,17 @@ def pi(n=10000):
   return a-b
 
 # 任意の検索結果を返す関数
-def match(text):
+def match(number):
   pattern = str(pi())
-  match_text = text
+  match_number = number
 
-  matchOB = re.search(str(match_text),str(pattern))
+  matchOB = re.search(str(match_number),str(pattern))
 
   if matchOB:
     return_text = (str(matchOB.group()) + "は小数点第" + str(matchOB.start()+1) + "位から第" + str(matchOB.end()) + "位に最初に出現します")
     return return_text
   else:
-    return_text = ((text) + 'は円周率10000桁の中に存在しません')
+    return_text = (str(match_number) + 'は円周率10000桁の中に存在しません')
     return return_text
 
 
