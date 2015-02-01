@@ -6,8 +6,17 @@ import re
 # localhost:8080にアクセスしたときに最初に開くページ
 @route('/')
 def index():
-  search_result = str(match(7690))
-  return template('index.tpl', search_result = search_result)
+  return template('index.tpl')
+
+@route('/first_result/', method="POST")
+def index():
+  search_result = str(match(request.POST.get("first_number")))
+  return template('first_result.tpl', search_result = search_result)
+
+@route('/second_result/', method="POST")
+def index():
+  search_result = str(match(request.POST.get("second_number")))
+  return template('first_result.tpl', search_result = search_result)
 
 # from http://codepad.org/N9hPp78j
 # 円周率を一万桁まで返す関数
@@ -17,7 +26,7 @@ def pi(n=10000):
   return a-b
 
 # 任意の検索結果を返す関数
-def match(number):
+def match(number = 10):
   pattern = str(pi())
   match_number = number
 

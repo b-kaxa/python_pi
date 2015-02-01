@@ -5,8 +5,9 @@
     <title>電力使用状況グラフ</title>
   </head>
   <body>
-    <form action="/first_result/" method="POST">
-      <input type="number" name="first_number">
+    <p>{{search_result}}</p>
+    <form action = "/second_result/" method="POST">
+      <input type="number" name="second_number">
       <input type="submit" value="送信">
     </form>
   </body>
