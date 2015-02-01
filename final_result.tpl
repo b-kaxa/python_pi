@@ -12,5 +12,6 @@
       <input type="submit" value="送信">
       <input type="hidden" name="total_score" value="{{score_result}}">
     </form> -->
+    <p><a href="/">もう一回やる</a></p>
   </body>
 </html>
