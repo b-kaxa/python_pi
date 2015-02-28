@@ -2,20 +2,10 @@
 
 import os
 from bottle import route, request, template, run, re, static_file, url
-from jinja2 import Environment, FileSystemLoader
 
-# localhost:8080にアクセスしたときに最初に開くページ
 @route('/')
 def index():
-  # env = Environment(loader=FileSystemLoader('./', encoding='utf8'))
-  # header = env.get_template('views/common/header.tpl').render()
-
   return template('./views/index.tpl', get_url = url)
-
-  # env = Environment(loader=FileSystemLoader('./', encoding='utf8'))
-  # tmpl = env.get_template('views/index.tpl')
-  # html = tmpl.render()
-  # return template(html, get_url = url)
 
 @route('/first_result/', method="POST")
 def index():
@@ -42,7 +32,7 @@ def index():
 
 @route('/final_result/', method="POST")
 def index():
-  # 入力された数字がどこに出現するか
+  # search
   search_result = str(match(request.POST.get("third_number")))
 
   # calc
@@ -52,7 +42,7 @@ def index():
   # view
   return template('./views/final_result.tpl', search_result = search_result, score_result = score_result, get_url = url)
 
-# 静的ファイルの読み込みに対する定義関数
+# define about reading static files
 @route('/bower_components/:path#.+#', name='static')
 def static(path):
     return static_file(path, root='bower_components')
@@ -62,13 +52,13 @@ def static(path):
     return static_file(path, root='static')
 
 # from http://codepad.org/N9hPp78j
-# 円周率を一万桁まで返す関数
+# calc pi
 def pi(n=10000):
   a,b,i = 10**n, 10**n, n*8+1
   while i>=3: a,i = (a+b+b)*(i/2)/i, i-2
   return a-b
 
-# 任意の検索結果を返す関数
+# return search result
 def match(number = 10):
   pattern = str(pi())
   match_number = number
@@ -76,13 +66,13 @@ def match(number = 10):
   matchOB = re.search(str(match_number),str(pattern))
 
   if matchOB:
-    return_text = (str(matchOB.group()) + "は小数点第" + str(matchOB.start()+1) + "位から第" + str(matchOB.end()) + "位に最初に出現します")
+    return_text = (str(matchOB.group()) + "は小数点第" + str(matchOB.start()+1) + "位から第" + str(matchOB.end()) + "位に最初に出現します！")
     return return_text
   else:
-    return_text = (str(match_number) + 'は円周率10000桁の中に存在しません')
+    return_text = (str(match_number) + 'は円周率10000桁の中に存在しません！残念！')
     return return_text
 
-# スコアを返す関数
+# return score result
 def get_score(number = 10):
   pattern = str(pi())
   match_number = number
@@ -96,6 +86,4 @@ def get_score(number = 10):
     return_score = 0
     return return_score
 
-
-# run(host = 'localhost', port = 8080, debug = True, reloader = True)
 run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True, reloader=True)
