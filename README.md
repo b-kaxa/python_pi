@@ -17,3 +17,9 @@ python pi_search.py
 
 ## bootstrap
 * bootstrapでマークアップしてみました
+
+## on heroku
+
+* herokuにデプロイしました
+
+* http://pi-game.herokuapp.com/
